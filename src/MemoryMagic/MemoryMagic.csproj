@@ -1,0 +1,48 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <PlatformTarget>x64</PlatformTarget>
+    <Platforms>x64</Platforms>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+    <UseWindowsForms>true</UseWindowsForms>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <ApplicationIcon>..\..\assets\MemoryMagic.ico</ApplicationIcon>
+    <AssemblyName>MemoryMagic</AssemblyName>
+    <RootNamespace>MemoryMagic</RootNamespace>
+    <Version>1.0.0</Version>
+    <BuildTimestamp>$([System.DateTime]::Now.ToString('yyyy-MM-dd HH:mm'))</BuildTimestamp>
+    <InformationalVersion>1.0.0+$(BuildTimestamp)</InformationalVersion>
+    <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
+
+    <!-- Baseline footprint (<30 MB idle) GC & runtime tuning -->
+    <ServerGarbageCollection>false</ServerGarbageCollection>
+    <ConcurrentGarbageCollection>true</ConcurrentGarbageCollection>
+    <RetainVMGarbageCollection>false</RetainVMGarbageCollection>
+    <TieredCompilation>true</TieredCompilation>
+    <TieredPGO>true</TieredPGO>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Using Remove="System.Windows.Forms" />
+    <Using Remove="System.Drawing" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="..\..\assets\UserGuide.html" LogicalName="MemoryMagic.UserGuide.html" Condition="Exists('..\..\assets\UserGuide.html')" />
+  </ItemGroup>
+
+  <!-- Automatically synchronize standalone MemoryMagic.exe to repository root after every build -->
+  <Target Name="SyncRootExecutable"
+          AfterTargets="Build"
+          Condition="'$(IsInnerSyncPublish)' != 'true' And '$(SkipRootExeSync)' != 'true'">
+    <Message Text="Synchronizing standalone MemoryMagic.exe to project root..." Importance="high" />
+    <Exec Command="powershell -NoProfile -ExecutionPolicy Bypass -File &quot;$(MSBuildProjectDirectory)\..\..\scripts\build-exe.ps1&quot; -Configuration Release"
+          ContinueOnError="false" />
+  </Target>
+
+</Project>

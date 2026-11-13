@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Memory Magic — User Guide</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card: #1e293b;
+      --border: #334155;
+      --text: #f8fafc;
+      --muted: #94a3b8;
+      --accent: #38bdf8;
+      --green: #4ade80;
+      --amber: #fbbf24;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 32px 20px;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    header {
+      background: linear-gradient(135deg, #1e3a8a, #0284c7);
+      border-radius: 12px;
+      padding: 28px 32px;
+      margin-bottom: 24px;
+      border: 1px solid rgba(56, 189, 248, 0.35);
+    }
+    header h1 { margin: 0 0 6px; font-size: 28px; letter-spacing: 0.4px; }
+    header p { margin: 0; color: #e0f2fe; font-size: 15px; }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 22px 24px;
+      margin-bottom: 18px;
+    }
+    h2 { margin: 0 0 10px; font-size: 19px; color: var(--accent); }
+    h3 { margin: 14px 0 6px; font-size: 15px; color: #e2e8f0; }
+    p, li { color: #cbd5e1; font-size: 14.5px; }
+    ul { margin: 8px 0 0; padding-left: 20px; }
+    li { margin-bottom: 6px; }
+    code {
+      background: #0f172a;
+      border: 1px solid var(--border);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: Consolas, monospace;
+      font-size: 13px;
+      color: var(--accent);
+    }
+    .tip {
+      border-left: 3px solid var(--green);
+      background: rgba(74, 222, 128, 0.08);
+      padding: 10px 14px;
+      border-radius: 0 6px 6px 0;
+      margin-top: 12px;
+      font-size: 13.5px;
+      color: #dcfce7;
+    }
+    .warn {
+      border-left: 3px solid var(--amber);
+      background: rgba(251, 191, 36, 0.08);
+      padding: 10px 14px;
+      border-radius: 0 6px 6px 0;
+      margin-top: 12px;
+      font-size: 13.5px;
+      color: #fef3c7;
+    }
+    footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 28px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Memory Magic v1.0.0 — User Guide</h1>
+      <p>A lightweight, native Windows utility for memory optimization, live hardware telemetry, startup control, and system cleanup.</p>
+    </header>
+
+    <div class="card">
+      <h2>1. Getting Started &amp; System Tray</h2>
+      <ul>
+        <li><strong>Main Dashboard:</strong> Launch Memory Magic from your Desktop or Start Menu shortcut to view real-time physical RAM, Commit Charge, Standby Cache, and Modified Page metrics.</li>
+        <li><strong>On Close Behavior:</strong> Use the <em>On Close</em> dropdown in the top bar to choose whether clicking <strong>X</strong> asks each time, minimizes to the System Tray, or exits completely.</li>
+        <li><strong>Run at Windows Startup:</strong> Enable <em>Run at Windows Startup</em> in the Memory Optimizer tab to launch Memory Magic quietly into your System Tray when you sign in to Windows.</li>
+        <li><strong>Elevate (UAC):</strong> Standard mode handles safe working-set optimization. Click <strong>Elevate (UAC)</strong> when you want full kernel standby-list purges, all-user startup control, or Windows Optional Feature management.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>2. Memory Optimizer</h2>
+      <ul>
+        <li><strong>Safe Optimize:</strong> Gently trims idle working sets of running applications so unused pages are released without interrupting active work.</li>
+        <li><strong>Deep Purge:</strong> Clears Standby, Modified, and System File Caches (requires Administrator privileges for full kernel purge).</li>
+        <li><strong>Automatic Background Monitor:</strong> Enable the background watcher to automatically trigger optimization when RAM pressure crosses your chosen threshold (e.g., 80%) or on a periodic interval.</li>
+      </ul>
+      <div class="tip">Tip: Hover over any control or click the <strong>?</strong> contextual help icon to see a plain-English summary and impact note.</div>
+    </div>
+
+    <div class="card">
+      <h2>3. Floating Performance Bar</h2>
+      <p>The compact Performance Bar displays live <strong>CPU</strong>, <strong>RAM</strong>, <strong>Network (Down/Up)</strong>, <strong>Disk Active % / Free Space / Health</strong>, and <strong>Battery</strong> (on laptops).</p>
+      <ul>
+        <li><strong>Drag to Move:</strong> Click and drag anywhere on the bar (when unlocked) to place it wherever you want on your screen.</li>
+        <li><strong>Lock / Pin Position:</strong> Click the padlock button on the right edge of the bar (or right-click &rarr; <em>Lock Position</em>) to freeze its screen coordinates and prevent accidental dragging.</li>
+        <li><strong>Pin to Taskbar:</strong> Right-click the bar or tray icon and select <em>Pin to Taskbar</em> to snap it neatly above your Windows taskbar.</li>
+        <li><strong>Always on Top:</strong> Keep the Performance Bar visible above full-screen or maximized windows.</li>
+        <li><strong>Drive Selector:</strong> Click the <code>&#9662;</code> button next to the disk readout to switch between <em>All Drives</em> or a specific drive letter.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>4. Process Profiler &amp; Startup Manager</h2>
+      <ul>
+        <li><strong>Process Profiler:</strong> Inspect top memory-consuming processes (Working Set and Private Bytes) and trim an individual process safely.</li>
+        <li><strong>Startup Manager:</strong> View and toggle programs configured to run at Windows startup across Registry Run keys and Startup folders.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>5. Temp Cleaner &amp; Windows Debloater</h2>
+      <ul>
+        <li><strong>Temp Cleaner:</strong> Select safe temporary folders (User Temp, Windows Temp, Browser/Update caches) and clean reclaimed disk space with live progress.</li>
+        <li><strong>Windows Debloater:</strong> Scan pre-installed UWP apps, Windows capabilities, and privacy/performance tweaks. Use <em>Select Safe Bloatware &amp; Tweaks</em> for conservative recommendations.</li>
+      </ul>
+      <div class="warn">Note: Before applying Debloater changes, Memory Magic prompts you to create a Windows System Restore Point so changes can be rolled back safely.</div>
+    </div>
+
+    <div class="card">
+      <h2>6. Uninstalling Memory Magic</h2>
+      <p>Open <strong>Windows Settings &rarr; Apps &rarr; Installed apps</strong>, search for <strong>Memory Magic</strong>, and click <strong>Uninstall</strong>, or run <code>Uninstall-MemoryMagic.cmd</code> inside the installation folder.</p>
+    </div>
+
+    <footer>Memory Magic v1.0.0 &bull; Native Win32 / .NET 8 Desktop Utility</footer>
+  </div>
+</body>
+</html>

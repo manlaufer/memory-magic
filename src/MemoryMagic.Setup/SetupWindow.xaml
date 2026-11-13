@@ -1,0 +1,344 @@
+<Window x:Class="MemoryMagic.Setup.SetupWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Memory Magic Setup"
+        Width="700"
+        MinWidth="620"
+        MinHeight="500"
+        SizeToContent="Height"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="CanMinimize"
+        UseLayoutRounding="True"
+        SnapsToDevicePixels="True"
+        Background="#0F172A"
+        Foreground="#F8FAFC"
+        FontFamily="Segoe UI">
+
+    <Window.Resources>
+        <Storyboard x:Key="HeaderShimmerStoryboard" RepeatBehavior="Forever" AutoReverse="True">
+            <DoubleAnimation Storyboard.TargetName="AccentGlowTransform"
+                             Storyboard.TargetProperty="X"
+                             From="-120" To="560" Duration="0:0:4.2">
+                <DoubleAnimation.EasingFunction>
+                    <SineEase EasingMode="EaseInOut" />
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+            <DoubleAnimation Storyboard.TargetName="BadgePulseScale"
+                             Storyboard.TargetProperty="ScaleX"
+                             From="1.0" To="1.05" Duration="0:0:1.6" />
+            <DoubleAnimation Storyboard.TargetName="BadgePulseScale"
+                             Storyboard.TargetProperty="ScaleY"
+                             From="1.0" To="1.05" Duration="0:0:1.6" />
+        </Storyboard>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" MinHeight="98" />
+            <RowDefinition Height="Auto" MinHeight="38" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" MinHeight="64" />
+        </Grid.RowDefinitions>
+
+        <!-- Colorful Animated Header Banner -->
+        <Border Grid.Row="0" ClipToBounds="True">
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#0F172A" Offset="0.0" />
+                    <GradientStop Color="#1E3A8A" Offset="0.52" />
+                    <GradientStop Color="#0284C7" Offset="1.0" />
+                </LinearGradientBrush>
+            </Border.Background>
+            <Grid Margin="26,18,26,14">
+                <!-- Animated Shimmer Accent -->
+                <Rectangle Width="180" Height="140" HorizontalAlignment="Left" VerticalAlignment="Center" IsHitTestVisible="False" Opacity="0.22">
+                    <Rectangle.RenderTransform>
+                        <TranslateTransform x:Name="AccentGlowTransform" X="-120" Y="-10" />
+                    </Rectangle.RenderTransform>
+                    <Rectangle.Fill>
+                        <RadialGradientBrush>
+                            <GradientStop Color="#38BDF8" Offset="0" />
+                            <GradientStop Color="Transparent" Offset="1" />
+                        </RadialGradientBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+
+                <StackPanel VerticalAlignment="Center">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <!-- Stylized App Emblem -->
+                        <Border Width="38" Height="38" CornerRadius="10" Margin="0,0,14,0">
+                            <Border.Background>
+                                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                    <GradientStop Color="#38BDF8" Offset="0" />
+                                    <GradientStop Color="#6366F1" Offset="1" />
+                                </LinearGradientBrush>
+                            </Border.Background>
+                            <Path Width="20" Height="20" Stretch="Uniform" Fill="#FFFFFF"
+                                  Data="M13,2L3,14H12L11,22L21,10H12L13,2Z" />
+                        </Border>
+
+                        <StackPanel VerticalAlignment="Center">
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                <TextBlock Text="MEMORY MAGIC" FontSize="24" FontWeight="ExtraBold" Foreground="#FFFFFF" />
+                                <Border CornerRadius="10" Padding="9,3" Margin="12,0,0,0" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5">
+                                    <Border.RenderTransform>
+                                        <ScaleTransform x:Name="BadgePulseScale" ScaleX="1" ScaleY="1" />
+                                    </Border.RenderTransform>
+                                    <Border.Background>
+                                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                            <GradientStop Color="#0EA5E9" Offset="0" />
+                                            <GradientStop Color="#6366F1" Offset="1" />
+                                        </LinearGradientBrush>
+                                    </Border.Background>
+                                    <TextBlock Text="v1.0.0 SETUP" FontSize="10.5" FontWeight="Bold" Foreground="#FFFFFF" />
+                                </Border>
+                            </StackPanel>
+                            <TextBlock Text="Native Windows Memory Optimizer, Performance Bar &amp; System Utility"
+                                       FontSize="12.5" Foreground="#BAE6FD" Margin="0,2,0,0" />
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- Step Indicator Bar -->
+        <Border Grid.Row="1" Background="#111827" BorderBrush="#1E293B" BorderThickness="0,1,0,1" Padding="12,8">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock x:Name="StepLabel0" Text="1. Welcome" FontSize="12" FontWeight="SemiBold" Foreground="#38BDF8" Margin="10,0" />
+                <TextBlock Text="›" FontSize="13" Foreground="#475569" />
+                <TextBlock x:Name="StepLabel1" Text="2. Location" FontSize="12" Foreground="#64748B" Margin="10,0" />
+                <TextBlock Text="›" FontSize="13" Foreground="#475569" />
+                <TextBlock x:Name="StepLabel2" Text="3. Options" FontSize="12" Foreground="#64748B" Margin="10,0" />
+                <TextBlock Text="›" FontSize="13" Foreground="#475569" />
+                <TextBlock x:Name="StepLabel3" Text="4. Installing" FontSize="12" Foreground="#64748B" Margin="10,0" />
+                <TextBlock Text="›" FontSize="13" Foreground="#475569" />
+                <TextBlock x:Name="StepLabel4" Text="5. Finish" FontSize="12" Foreground="#64748B" Margin="10,0" />
+            </StackPanel>
+        </Border>
+
+        <!-- Wizard Pages Container -->
+        <ScrollViewer Grid.Row="2"
+                      VerticalScrollBarVisibility="Auto"
+                      HorizontalScrollBarVisibility="Disabled"
+                      Focusable="False">
+            <Grid x:Name="PagesHost" Margin="26,18,26,18">
+                <Grid.RenderTransform>
+                    <TranslateTransform x:Name="PageSlideTransform" X="0" />
+                </Grid.RenderTransform>
+
+            <!-- PAGE 0: WELCOME & OVERVIEW -->
+            <Grid x:Name="Page0Welcome" Visibility="Visible">
+                <StackPanel>
+                    <TextBlock Text="Welcome to Memory Magic Setup" FontSize="18" FontWeight="Bold" Foreground="#F8FAFC" Margin="0,0,0,6" />
+                    <TextBlock TextWrapping="Wrap" FontSize="13" Foreground="#CBD5E1" Margin="0,0,0,14"
+                               Text="This wizard will install Memory Magic on your computer. Built on native Win32/NT APIs with zero third-party dependencies, it keeps idle RAM usage under 30 MB." />
+
+                    <UniformGrid Columns="2" Rows="2">
+                        <Border Background="#1E293B" BorderBrush="#334155" BorderThickness="1" CornerRadius="8" Padding="12" Margin="0,0,8,8">
+                            <StackPanel>
+                                <TextBlock Text="Memory Optimizer" FontSize="13" FontWeight="SemiBold" Foreground="#38BDF8" Margin="0,0,0,3" />
+                                <TextBlock TextWrapping="Wrap" FontSize="11.5" Foreground="#94A3B8"
+                                           Text="Safe working-set trimming, Deep Purge (Standby/Modified/File Cache), and automatic background threshold monitoring." />
+                            </StackPanel>
+                        </Border>
+                        <Border Background="#1E293B" BorderBrush="#334155" BorderThickness="1" CornerRadius="8" Padding="12" Margin="8,0,0,8">
+                            <StackPanel>
+                                <TextBlock Text="Floating Performance Bar" FontSize="13" FontWeight="SemiBold" Foreground="#60A5FA" Margin="0,0,0,3" />
+                                <TextBlock TextWrapping="Wrap" FontSize="11.5" Foreground="#94A3B8"
+                                           Text="Live CPU, RAM, Disk, Network &amp; Battery telemetry bar with smooth drag-to-move, position lock, and Always-on-Top." />
+                            </StackPanel>
+                        </Border>
+                        <Border Background="#1E293B" BorderBrush="#334155" BorderThickness="1" CornerRadius="8" Padding="12" Margin="0,0,8,0">
+                            <StackPanel>
+                                <TextBlock Text="Process Profiler &amp; Startup" FontSize="13" FontWeight="SemiBold" Foreground="#34D399" Margin="0,0,0,3" />
+                                <TextBlock TextWrapping="Wrap" FontSize="11.5" Foreground="#94A3B8"
+                                           Text="Inspect per-process memory pools and safely toggle Windows startup items from a unified dashboard." />
+                            </StackPanel>
+                        </Border>
+                        <Border Background="#1E293B" BorderBrush="#334155" BorderThickness="1" CornerRadius="8" Padding="12" Margin="8,0,0,0">
+                            <StackPanel>
+                                <TextBlock Text="Temp Cleaner &amp; Debloater" FontSize="13" FontWeight="SemiBold" Foreground="#FBBF24" Margin="0,0,0,3" />
+                                <TextBlock TextWrapping="Wrap" FontSize="11.5" Foreground="#94A3B8"
+                                           Text="Clean temporary caches and remove unwanted UWP/Win32 software with live progress reporting." />
+                            </StackPanel>
+                        </Border>
+                    </UniformGrid>
+                </StackPanel>
+            </Grid>
+
+            <!-- PAGE 1: INSTALLATION PATH -->
+            <Grid x:Name="Page1Location" Visibility="Collapsed">
+                <StackPanel>
+                    <TextBlock Text="Choose Installation Location" FontSize="18" FontWeight="Bold" Foreground="#F8FAFC" Margin="0,0,0,6" />
+                    <TextBlock TextWrapping="Wrap" FontSize="13" Foreground="#CBD5E1" Margin="0,0,0,16"
+                               Text="Select the folder where Memory Magic will be installed. To install to a different folder, click Browse and choose another location." />
+
+                    <Border Background="#1E293B" BorderBrush="#334155" BorderThickness="1" CornerRadius="8" Padding="16" Margin="0,0,0,14">
+                        <StackPanel>
+                            <TextBlock Text="Destination Folder" FontSize="12.5" FontWeight="SemiBold" Foreground="#94A3B8" Margin="0,0,0,8" />
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <TextBox x:Name="InstallPathTextBox"
+                                         Grid.Column="0"
+                                         Height="34"
+                                         Padding="10,6"
+                                         FontSize="13"
+                                         Background="#0F172A"
+                                         Foreground="#F8FAFC"
+                                         BorderBrush="#475569"
+                                         BorderThickness="1"
+                                         VerticalContentAlignment="Center"
+                                         TextChanged="OnInstallPathTextChanged" />
+                                <Button x:Name="BrowseButton"
+                                        Grid.Column="1"
+                                        Content="Browse..."
+                                        Style="{StaticResource SecondaryButtonStyle}"
+                                        Margin="10,0,0,0"
+                                        Height="34"
+                                        Padding="16,0"
+                                        Click="OnBrowseClick" />
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+
+                    <Border Background="#1E293B" BorderBrush="#334155" BorderThickness="1" CornerRadius="8" Padding="14">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0">
+                                <TextBlock Text="Space Required" FontSize="11.5" Foreground="#94A3B8" />
+                                <TextBlock x:Name="RequiredSpaceText" Text="69.0 MB" FontSize="14" FontWeight="SemiBold" Foreground="#F8FAFC" Margin="0,2,0,0" />
+                            </StackPanel>
+                            <StackPanel Grid.Column="1">
+                                <TextBlock Text="Space Available" FontSize="11.5" Foreground="#94A3B8" />
+                                <TextBlock x:Name="AvailableSpaceText" Text="Checking..." FontSize="14" FontWeight="SemiBold" Foreground="#4ADE80" Margin="0,2,0,0" />
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                    <TextBlock x:Name="PathValidationText" FontSize="12" Foreground="#F87171" Margin="2,8,0,0" Visibility="Collapsed" />
+                </StackPanel>
+            </Grid>
+
+            <!-- PAGE 2: OPTIONS -->
+            <Grid x:Name="Page2Options" Visibility="Collapsed">
+                <StackPanel>
+                    <TextBlock Text="Installation Options" FontSize="18" FontWeight="Bold" Foreground="#F8FAFC" Margin="0,0,0,6" />
+                    <TextBlock TextWrapping="Wrap" FontSize="13" Foreground="#CBD5E1" Margin="0,0,0,16"
+                               Text="Customize shortcuts and review your installation settings before copying files." />
+
+                    <Border Background="#1E293B" BorderBrush="#334155" BorderThickness="1" CornerRadius="8" Padding="16" Margin="0,0,0,14">
+                        <StackPanel>
+                            <CheckBox x:Name="DesktopShortcutCheck"
+                                      Content="Create a Desktop shortcut"
+                                      IsChecked="True"
+                                      FontSize="13.5"
+                                      Foreground="#F8FAFC"
+                                      Margin="0,0,0,12" />
+                            <CheckBox x:Name="StartMenuShortcutCheck"
+                                      Content="Create a Start Menu shortcut"
+                                      IsChecked="True"
+                                      FontSize="13.5"
+                                      Foreground="#F8FAFC" />
+                        </StackPanel>
+                    </Border>
+
+                    <Border Background="#1E293B" BorderBrush="#334155" BorderThickness="1" CornerRadius="8" Padding="14">
+                        <StackPanel>
+                            <TextBlock Text="Ready to Install" FontSize="12.5" FontWeight="SemiBold" Foreground="#38BDF8" Margin="0,0,0,6" />
+                            <TextBlock x:Name="SummaryPathText" TextWrapping="Wrap" FontSize="12.5" Foreground="#CBD5E1" />
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </Grid>
+
+            <!-- PAGE 3: INSTALLING PROGRESS -->
+            <Grid x:Name="Page3Progress" Visibility="Collapsed">
+                <StackPanel VerticalAlignment="Center">
+                    <TextBlock Text="Installing Memory Magic..." FontSize="18" FontWeight="Bold" Foreground="#F8FAFC" Margin="0,0,0,6" />
+                    <TextBlock x:Name="InstallStatusText" Text="Preparing installation..." FontSize="13" Foreground="#CBD5E1" Margin="0,0,0,18" />
+
+                    <Border Background="#1E293B" BorderBrush="#334155" BorderThickness="1" CornerRadius="8" Padding="18">
+                        <StackPanel>
+                            <Grid Margin="0,0,0,8">
+                                <TextBlock x:Name="InstallDetailText" Text="Initializing..." FontSize="12" Foreground="#94A3B8" HorizontalAlignment="Left" />
+                                <TextBlock x:Name="InstallPercentText" Text="0%" FontSize="12.5" FontWeight="Bold" Foreground="#38BDF8" HorizontalAlignment="Right" />
+                            </Grid>
+                            <ProgressBar x:Name="InstallProgressBar"
+                                         Height="14"
+                                         Minimum="0"
+                                         Maximum="100"
+                                         Value="0"
+                                         Background="#0F172A"
+                                         Foreground="#38BDF8"
+                                         BorderThickness="0" />
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </Grid>
+
+            <!-- PAGE 4: FINISH -->
+            <Grid x:Name="Page4Finish" Visibility="Collapsed">
+                <StackPanel VerticalAlignment="Center">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,0,12">
+                        <Border Width="42" Height="42" CornerRadius="21" Background="#166534" BorderBrush="#4ADE80" BorderThickness="1.5" Margin="0,0,14,0">
+                            <Path Width="20" Height="20" Stretch="Uniform" Fill="#4ADE80"
+                                  Data="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z" />
+                        </Border>
+                        <StackPanel VerticalAlignment="Center">
+                            <TextBlock Text="Installation Complete!" FontSize="19" FontWeight="Bold" Foreground="#F8FAFC" />
+                            <TextBlock Text="Memory Magic has been installed on your computer." FontSize="13" Foreground="#CBD5E1" />
+                        </StackPanel>
+                    </StackPanel>
+
+                    <Border Background="#1E293B" BorderBrush="#334155" BorderThickness="1" CornerRadius="8" Padding="16" Margin="0,8,0,16">
+                        <StackPanel>
+                            <TextBlock x:Name="FinishPathText" TextWrapping="Wrap" FontSize="12.5" Foreground="#94A3B8" Margin="0,0,0,12" />
+                            <CheckBox x:Name="LaunchAfterInstallCheck"
+                                      Content="Launch Memory Magic now"
+                                      IsChecked="True"
+                                      FontSize="13.5"
+                                      FontWeight="SemiBold"
+                                      Foreground="#F8FAFC"
+                                      Margin="0,0,0,10" />
+                            <CheckBox x:Name="OpenUserGuideCheck"
+                                      Content="Open User Guide"
+                                      IsChecked="False"
+                                      FontSize="13"
+                                      Foreground="#CBD5E1" />
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </Grid>
+            </Grid>
+        </ScrollViewer>
+
+        <!-- Footer Navigation Bar -->
+        <Border Grid.Row="3" Background="#111827" BorderBrush="#1E293B" BorderThickness="0,1,0,0" Padding="26,14">
+            <Grid VerticalAlignment="Center">
+                <Button x:Name="CancelButton"
+                        Content="Cancel"
+                        Style="{StaticResource SecondaryButtonStyle}"
+                        HorizontalAlignment="Left"
+                        Click="OnCancelClick" />
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button x:Name="BackButton"
+                            Content="‹ Back"
+                            Style="{StaticResource SecondaryButtonStyle}"
+                            Margin="0,0,10,0"
+                            Visibility="Collapsed"
+                            Click="OnBackClick" />
+                    <Button x:Name="NextButton"
+                            Content="Next ›"
+                            Style="{StaticResource PrimaryButtonStyle}"
+                            Click="OnNextClick" />
+                </StackPanel>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>
